@@ -19,7 +19,7 @@ app.secret_key = "ABC"
 
 app.jinja_env.undefined = StrictUndefined
 
-DEFAULT_DATE = datetime.date.today()
+DEFAULT_DATE = datetime.date.today() + datetime.timedelta(days=1)
 DEFAULT_DURATION = 3
 DEFAULT_THEME = ''
 
@@ -41,10 +41,10 @@ def ajax_flight_results():
 	theme = request.args.get('theme') # one of ['', 'BEACH', 'GAMBLING', 'HISTORIC', 'OUTDOORS', 'ROMANTIC', 'SHOPPING', 'THEME-PARK']
 
 	if date_option == 'tomorrow':
-		depart_date = datetime.date.today() + datetime.timedelta(days=1)
+		depart_date = datetime.date.today() + datetime.timedelta(days=2)
 		scheduled_flights = MONDAY_SCHEDULED_FLIGHTS
 	else:
-		depart_date = datetime.date.today()
+		depart_date = datetime.date.today() + datetime.timedelta(days=1)
 		scheduled_flights = SUNDAY_SCHEDULED_FLIGHTS
 	flights_with_price = get_flight_results(depart_date, duration, theme, scheduled_flights)
 
